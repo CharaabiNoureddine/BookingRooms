@@ -43,7 +43,8 @@ export class Reservation extends Component {
     }
 
     async supprimerReservation(id) {
-        const response = await fetch('api/Reservation/' + {id});
+        await fetch('api/Reservation/' + id, { method: 'DELETE' });
+        window.location.reload();
         alert('Suppression OK ');
     }
 

@@ -33,8 +33,8 @@ export class BookingForm extends Component {
         fetch('api/reservation/MakeReservation', requestOptions).then(response => {
             if (response.ok) {
                 response.json().then(json => {
-                    if (json[0] == "OK") {
-                        alert("Créartion succès !" + json);
+                    if (json[0] === "OK") {
+                        alert("Créartion avec succès !" + json);
                     } else {
                         alert("Conflit, merci de choisir un créneau dans les créneaux disponible !" + json);
                     }
@@ -57,7 +57,7 @@ export class BookingForm extends Component {
                 </div>
 
                 <div style={{ 'width': '100%', 'height':'50px' }}>
-                    <label style={{ 'float': 'left', 'width': '170px' }}>Salle *</label> <input name="room" style={{ 'float': 'left', 'marginBottom': '10px', 'width': '200px' }} id="room" className="form-control" value={this.state.room} />
+                    <label style={{ 'float': 'left', 'width': '170px' }}>Salle *</label> <input name="room" style={{ 'float': 'left', 'marginBottom': '10px', 'width': '200px' }} readOnly  id="room" className="form-control" defaultValue={this.state.room} />
                 </div>
 
                 <div>

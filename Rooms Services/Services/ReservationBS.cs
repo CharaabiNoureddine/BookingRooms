@@ -59,17 +59,18 @@ namespace Rooms_Services.Services
 
         public void DeleteReservation(string id, IMemoryCache _cache)
         {
-            IList<Reservation> cacheEntry;
+            IList<Reservation> cacheEntry = null;
 
             // Look for cache key.
             if (!_cache.TryGetValue(Constantes.KeyReservation, out cacheEntry))
             {
-                if (cacheEntry != null)
+                if (cacheEntry == null)
                 {
                     cacheEntry = new List<Reservation>();
                 }
-                // Key not in cache, so get data.
-                cacheEntry.Remove(cacheEntry.Where(x => x.Id == Int32.Parse(id)).FirstOrDefault());
+            }
+            // Key not in cache, so get data.
+            cacheEntry.Remove(cacheEntry.Where(x => x.Id == Int32.Parse(id)).FirstOrDefault());
 
                 // Set cache options.
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
@@ -79,7 +80,6 @@ namespace Rooms_Services.Services
                 // Save data in cache.
                 _cache.Set(Constantes.KeyReservation, cacheEntry, cacheEntryOptions);
             }
-        }
 
         public IList<Reservation> GetReservations(IMemoryCache _cache)
         {
